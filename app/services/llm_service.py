@@ -19,10 +19,11 @@ RUNPOD_API_KEY = os.getenv("RUNPOD_API_KEY")
 class LLMService:
     def __init__(self):
         self.api_url = RUNPOD_API_URL
-            
+        
+        # Einfacher Header ohne Manipulation des API-Keys
         self.headers = {
             "Content-Type": "application/json",
-            "Authorization": RUNPOD_API_KEY
+            "Authorization": RUNPOD_API_KEY  # Direkt ohne "Bearer" Präfix
         }
         
         logger.info(f"LLM Service initialized with URL: {self.api_url}")
@@ -30,6 +31,9 @@ class LLMService:
     
     def _clean_output(self, text):
         """Bereinigt die Ausgabe des Modells von internen Gedankengängen"""
+        if not text or not isinstance(text, str):
+            return "Keine gültige Antwort vom LLM erhalten."
+            
         # Entferne Zeilen, die mit "Der Nutzer" beginnen
         text = re.sub(r"Der Nutzer[^\n]*\n", "", text)
         
@@ -39,10 +43,6 @@ class LLMService:
         # Entferne andere englische Gedankengänge
         text = re.sub(r"I already know that.*?\n", "", text)
         text = re.sub(r"I need to.*?\n", "", text)
-        
-        # Falls "Berlin" im Text vorkommt, extrahiere einen sauberen Satz
-        if "Berlin" in text:
-            return "Die Hauptstadt von Deutschland ist Berlin."
         
         return text.strip()
     
@@ -70,14 +70,13 @@ ANTWORT:"""
         try:
             logger.info("Preparing payload for DeepSeek")
             
-            # Payload für DeepSeek
+            # Standard-Payload für RunPod mit max_tokens 
             payload = {
                 "input": {
                     "prompt": prompt,
-                    "max_new_tokens": 512,
+                    "max_tokens": 512,
                     "temperature": 0.7,
-                    "top_p": 0.9,
-                    "stop": ["<|im_end|>"]
+                    "top_p": 0.9
                 }
             }
             
@@ -101,33 +100,27 @@ ANTWORT:"""
                         result = response.json()
                         logger.info(f"Response structure: {list(result.keys())}")
                         
-                        # Handle specific DeepSeek response format
-                        if "output" in result and isinstance(result["output"], list) and len(result["output"]) > 0:
-                            output_obj = result["output"][0]
-                            
-                            if "choices" in output_obj and len(output_obj["choices"]) > 0:
-                                if "tokens" in output_obj["choices"][0]:
-                                    # Extract text from tokens
-                                    text = output_obj["choices"][0]["tokens"][0]
-                                    
-                                    # Clean the text
-                                    cleaned_text = self._clean_output(text)
-                                    return cleaned_text
-                        
-                        # Fallback für andere Formate
+                        # Handle specific RunPod response format
                         if "output" in result:
                             output = result["output"]
+                            logger.info(f"Got output structure: {type(output)}")
+                            
                             if isinstance(output, str):
-                                return output
+                                cleaned_text = self._clean_output(output)
+                                return cleaned_text
                             elif isinstance(output, dict):
                                 for key in ["text", "response", "generated_text", "content", "answer"]:
                                     if key in output and isinstance(output[key], str):
-                                        return output[key]
+                                        return self._clean_output(output[key])
+                                # Fallback: gesamten Output verwenden
                                 return str(output)
                             else:
-                                return str(output)
+                                return f"Unerwartetes Antwortformat: {json.dumps(output)}"
                         else:
+                            # Fallback für unerwartetes Format
+                            logger.warning(f"Unexpected response format: {json.dumps(result)}")
                             return f"Unerwartete Antwortstruktur: {json.dumps(result)}"
+                            
                     except Exception as e:
                         logger.exception(f"Error parsing response: {e}")
                         return f"Fehler beim Parsen der Antwort: {str(e)}"
@@ -153,13 +146,13 @@ ANTWORT:"""
             # Format für DeepSeek
             formatted_prompt = test_prompt
             
+            # Standard-Payload für RunPod
             payload = {
                 "input": {
                     "prompt": formatted_prompt,
-                    "max_new_tokens": 100,
+                    "max_tokens": 100,
                     "temperature": 0.5,
-                    "top_p": 0.9,
-                    "stop": ["<|im_end|>"]
+                    "top_p": 0.9
                 }
             }
             
@@ -179,7 +172,7 @@ ANTWORT:"""
                 logger.info(f"Debug: Response status: {status_code}")
                 
                 try:
-                    response_json = response.json()
+                    response_json = response.json() if response.content else {}
                     logger.info(f"Debug: Response JSON: {json.dumps(response_json)}")
                 except Exception as e:
                     response_json = {"error": f"Failed to parse JSON: {str(e)}"}
@@ -191,15 +184,12 @@ ANTWORT:"""
                 # Extract and clean text if possible
                 cleaned_text = None
                 try:
-                    if ("output" in response_json and 
-                        isinstance(response_json["output"], list) and 
-                        len(response_json["output"]) > 0 and
-                        "choices" in response_json["output"][0] and
-                        len(response_json["output"][0]["choices"]) > 0 and
-                        "tokens" in response_json["output"][0]["choices"][0]):
-                        
-                        raw_text = response_json["output"][0]["choices"][0]["tokens"][0]
-                        cleaned_text = self._clean_output(raw_text)
+                    if "output" in response_json:
+                        output = response_json["output"]
+                        if isinstance(output, str):
+                            cleaned_text = self._clean_output(output)
+                        elif isinstance(output, dict) and "text" in output:
+                            cleaned_text = self._clean_output(output["text"])
                 except Exception as e:
                     logger.error(f"Error cleaning output: {e}")
                 

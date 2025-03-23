@@ -65,14 +65,20 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
         logger.info(f"Indexing document: {path}")
         
         # Get document content
+        logger.info(f"Requesting content from Dropbox for path: /{path}")
         content = dropbox_service.download_file(f"/{path}")
+        
         if not content:
             logger.error(f"Document not found or empty: {path}")
             raise HTTPException(status_code=404, detail="Document not found or could not be downloaded")
         
+        # Log content stats
+        logger.info(f"Document content received. Length: {len(content)} characters")
+        logger.info(f"Content preview (first 200 chars): {content[:200]}")
+        
         # Get document information
         doc_name = path.rsplit('/', 1)[-1]
-        logger.info(f"Document name: {doc_name}, content length: {len(content)} characters")
+        logger.info(f"Document name: {doc_name}")
         
         # Special handling for very small or large documents
         if len(content) < 10:
@@ -81,6 +87,7 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
         
         # Index document
         try:
+            logger.info(f"Starting indexing for document: {path}")
             success = qdrant_service.index_document(
                 document_id=path,
                 document_path=f"/{path}",
@@ -88,8 +95,14 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
                 document_content=content
             )
             
+            logger.info(f"Indexing result: {success}")
+            
             if not success:
                 logger.error(f"Failed to index document: {path}")
+                # Detaillierte Debugging-Info
+                indexed_docs = qdrant_service.list_indexed_documents()
+                logger.info(f"Current indexed documents: {indexed_docs}")
+                
                 raise HTTPException(status_code=500, detail="Failed to index document")
             
             logger.info(f"Document indexed successfully: {path}")
