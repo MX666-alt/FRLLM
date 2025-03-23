@@ -2,6 +2,9 @@ import os
 import logging
 import traceback
 import numpy as np
+import hashlib
+import uuid
+import random
 from typing import List, Dict, Any
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
@@ -25,8 +28,6 @@ class QdrantService:
     def __init__(self):
         try:
             logger.info(f"Initializing Qdrant client with URL: {QDRANT_URL}")
-            logger.info(f"Using collection name: {QDRANT_COLLECTION_NAME}")
-            
             self.client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
             logger.info("Qdrant client initialized successfully")
             
@@ -67,6 +68,22 @@ class QdrantService:
             logger.error(traceback.format_exc())
             raise
     
+    def _generate_numeric_id(self, text, chunk_index=None):
+        """Generate a numeric ID for Qdrant based on the document content"""
+        # Create a hash of the text
+        hash_obj = hashlib.md5(text.encode('utf-8'))
+        hash_hex = hash_obj.hexdigest()
+        
+        # Convert the first 12 chars of the hex to an integer
+        # This should give a number between 0 and 2^48-1
+        num_id = int(hash_hex[:12], 16)
+        
+        # If we have a chunk index, add it to the ID to make it unique per chunk
+        if chunk_index is not None:
+            num_id = num_id * 1000 + chunk_index % 1000
+        
+        return num_id
+    
     def list_indexed_documents(self) -> List[str]:
         """Get a list of all document IDs that have been indexed"""
         try:
@@ -82,48 +99,65 @@ class QdrantService:
             
             # Get collection info to check if it has points
             collection_info = self.client.get_collection(self.collection_name)
-            
-            # Check points_count instead of vectors_count
-            points_count = getattr(collection_info, 'points_count', 0)
-            if not points_count:
+            if collection_info.points_count == 0:
                 logger.warning(f"Collection {self.collection_name} exists but has no points")
                 return []
-            
-            # Get all document IDs using scroll pagination
-            all_doc_ids = set()
-            offset = None
-            limit = 100  # Number of points to retrieve per request
-            
-            while True:
-                # Get batch of points
+                
+            # Get all points (up to 100)
+            try:
                 scroll_result = self.client.scroll(
                     collection_name=self.collection_name,
-                    limit=limit,
-                    offset=offset,
+                    limit=100,
                     with_payload=True,
                     with_vectors=False
                 )
                 
                 points = scroll_result[0]  # First element is the list of points
-                next_offset = scroll_result[1]  # Second element is the next offset
                 
                 if not points:
-                    break
+                    logger.warning(f"No points found in collection {self.collection_name}")
+                    return []
                     
-                # Extract document IDs from points
+                # Extract unique document IDs
+                doc_ids = set()
                 for point in points:
                     if 'document_id' in point.payload:
+                        # Extract the base document ID from the point ID
                         doc_id = point.payload['document_id']
-                        all_doc_ids.add(doc_id)
+                        doc_ids.add(doc_id)
                 
-                # Check if we've retrieved all points
-                if next_offset is None:
-                    break
+                logger.info(f"Found {len(doc_ids)} unique document IDs")
+                return list(doc_ids)
+            except Exception as e:
+                logger.error(f"Error scrolling points: {e}")
+                
+                # Fallback: try search with a dummy vector
+                try:
+                    logger.info("Trying alternative method to get documents")
+                    # Create a dummy vector of zeros
+                    dummy_vector = [0.0] * self.vector_size
                     
-                offset = next_offset
-            
-            logger.info(f"Found {len(all_doc_ids)} unique document IDs")
-            return list(all_doc_ids)
+                    # Search with a high limit
+                    search_results = self.client.search(
+                        collection_name=self.collection_name,
+                        query_vector=dummy_vector,
+                        limit=100,
+                        with_payload=True
+                    )
+                    
+                    # Extract unique document IDs
+                    doc_ids = set()
+                    for result in search_results:
+                        if 'document_id' in result.payload:
+                            doc_id = result.payload['document_id']
+                            doc_ids.add(doc_id)
+                    
+                    logger.info(f"Found {len(doc_ids)} unique document IDs using alternative method")
+                    return list(doc_ids)
+                except Exception as search_err:
+                    logger.error(f"Error using alternative method: {search_err}")
+                    return []
+                
         except Exception as e:
             logger.error(f"Error listing indexed documents: {str(e)}")
             logger.error(traceback.format_exc())
@@ -143,76 +177,49 @@ class QdrantService:
                 logger.warning(f"Empty document content for {document_name}")
                 return False
             
-            # Delete existing document chunks if they exist
-            logger.info(f"Checking if document {document_id} already exists")
-            
+            # Try to delete existing document chunks if they exist
             try:
-                # Create filter to find existing points for this document
-                filter_condition = Filter(
-                    must=[
-                        FieldCondition(
-                            key="document_id",
-                            match=MatchValue(value=document_id)
-                        )
-                    ]
-                )
-                
-                # Try to find existing points
-                existing_points = self.client.scroll(
-                    collection_name=self.collection_name,
-                    filter=filter_condition,
-                    limit=1,
-                    with_payload=True,
-                    with_vectors=False
-                )
-                
-                if existing_points[0]:  # If points exist
-                    logger.info(f"Document {document_id} already exists, deleting existing chunks")
+                # We'll try to search for existing documents
+                indexed_docs = self.list_indexed_documents()
+                if document_id in indexed_docs:
+                    logger.info(f"Document {document_id} already exists, need to delete")
                     
-                    # Sammle zuerst alle IDs (robuster als Filterlöschung)
-                    all_point_ids = []
-                    offset = None
+                    # Try to find all points with this document_id
+                    dummy_vector = [0.0] * self.vector_size
                     
-                    while True:
-                        batch_result = self.client.scroll(
-                            collection_name=self.collection_name,
-                            filter=filter_condition,
-                            limit=100,
-                            offset=offset,
-                            with_payload=False,
-                            with_vectors=False
-                        )
+                    # This is a workaround for missing filter support in older versions
+                    search_results = self.client.search(
+                        collection_name=self.collection_name,
+                        query_vector=dummy_vector,
+                        limit=100,  # Get up to 100 points
+                        with_payload=True
+                    )
+                    
+                    # Filter the results manually
+                    point_ids = []
+                    for result in search_results:
+                        if 'document_id' in result.payload and result.payload['document_id'] == document_id:
+                            point_ids.append(result.id)
+                    
+                    if point_ids:
+                        logger.info(f"Deleting {len(point_ids)} existing points for document {document_id}")
+                        for point_id in point_ids:
+                            try:
+                                self.client.delete(
+                                    collection_name=self.collection_name,
+                                    points_selector=models.PointIdsList(points=[point_id])
+                                )
+                            except Exception as del_err:
+                                logger.warning(f"Error deleting point {point_id}: {del_err}")
                         
-                        points = batch_result[0]
-                        next_offset = batch_result[1]
-                        
-                        if not points:
-                            break
-                            
-                        all_point_ids.extend([point.id for point in points])
-                        
-                        if next_offset is None:
-                            break
-                            
-                        offset = next_offset
-                    
-                    # Lösche die Punkte per ID (wenn welche gefunden wurden)
-                    if all_point_ids:
-                        logger.info(f"Deleting {len(all_point_ids)} existing points for document {document_id}")
-                        self.client.delete(
-                            collection_name=self.collection_name,
-                            points_selector=models.PointIdsList(
-                                points=all_point_ids
-                            )
-                        )
-                    
-                    logger.info(f"Deleted existing chunks for document {document_id}")
+                        logger.info(f"Deleted existing chunks for document {document_id}")
             except Exception as e:
                 logger.warning(f"Error checking/deleting existing document: {e}")
                 # Continue with indexing even if checking fails
-                
+            
             # Split content into chunks
             chunks = self._chunk_text(document_content)
+            logger.info(f"Created {len(chunks)} chunks from document")
             logger.info(f"Split document into {len(chunks)} chunks")
             
             if not chunks:
@@ -220,9 +227,8 @@ class QdrantService:
                 return False
             
             # Create embeddings for each chunk
-            points = []
-            
             logger.info(f"Creating embeddings for {len(chunks)} chunks")
+            points = []
             for i, chunk in enumerate(chunks):
                 # Skip empty chunks
                 if not chunk.strip():
@@ -233,22 +239,9 @@ class QdrantService:
                     logger.info(f"Creating embedding for chunk {i} (length: {len(chunk)})")
                     embedding = self.model.encode(chunk)
                     
-                    # Validate embedding
-                    if not isinstance(embedding, np.ndarray):
-                        logger.warning(f"Invalid embedding type for chunk {i}: {type(embedding)}")
-                        continue
-                    
-                    if len(embedding) != self.vector_size:
-                        logger.warning(f"Invalid embedding size for chunk {i}: {len(embedding)} instead of {self.vector_size}")
-                        continue
-                    
-                    # Create point with a safe ID
-                    safe_doc_id = document_id.replace('/', '_').replace(' ', '_').replace('.', '_')
-                    point_id = f"{safe_doc_id}_{i}"
-                    
-                    # Create shorter preview of the chunk for logging
-                    chunk_preview = chunk[:100] + "..." if len(chunk) > 100 else chunk
-                    logger.info(f"Creating point with ID: {point_id}, chunk preview: {chunk_preview}")
+                    # Generate a numeric ID for this point
+                    point_id = self._generate_numeric_id(document_id, i)
+                    logger.info(f"Creating point with ID: {point_id}, chunk preview: {chunk[:50]}")
                     
                     points.append(
                         PointStruct(
@@ -265,55 +258,49 @@ class QdrantService:
                     )
                 except Exception as e:
                     logger.error(f"Error creating embedding for chunk {i}: {str(e)}")
-                    logger.error(traceback.format_exc())
                     continue
             
             # Upload points to Qdrant
             if points:
                 logger.info(f"Ready to upload {len(points)} points to Qdrant")
                 
-                # Kleine Stapelgröße für bessere Zuverlässigkeit
-                batch_size = 50  # Process in batches to avoid timeouts
+                # Upload in batches of 10 to avoid large requests
+                batch_size = 10
+                total_batches = (len(points) + batch_size - 1) // batch_size
+                
                 for i in range(0, len(points), batch_size):
                     batch = points[i:i+batch_size]
-                    logger.info(f"Uploading batch of {len(batch)} points to Qdrant (batch {i//batch_size + 1}/{(len(points)+batch_size-1)//batch_size})")
+                    batch_num = i // batch_size + 1
+                    logger.info(f"Uploading batch of {len(batch)} points to Qdrant (batch {batch_num}/{total_batches})")
                     
                     try:
-                        # Versuche den Stapel hochzuladen
-                        result = self.client.upsert(
+                        self.client.upsert(
                             collection_name=self.collection_name,
-                            points=batch
+                            points=batch,
+                            wait=True
                         )
-                        logger.info(f"Batch upload successful: {result}")
-                    except Exception as batch_error:
-                        logger.error(f"Error uploading batch: {str(batch_error)}")
-                        logger.error(traceback.format_exc())
-                        
-                        # Versuche jeden Punkt einzeln hochzuladen
+                    except Exception as e:
+                        logger.error(f"Error uploading batch: {e}")
+                        # Try to upload points individually
                         logger.info("Trying to upload points individually...")
                         for point in batch:
                             try:
                                 self.client.upsert(
                                     collection_name=self.collection_name,
-                                    points=[point]
+                                    points=[point],
+                                    wait=True
                                 )
-                                logger.info(f"Successfully uploaded point: {point.id}")
-                            except Exception as point_error:
-                                logger.error(f"Error uploading point {point.id}: {str(point_error)}")
+                            except Exception as e:
+                                logger.error(f"Error uploading point {point.id}: {e}")
                 
-                # Überprüfe, ob die Punkte tatsächlich hochgeladen wurden
-                try:
-                    # Prüfen, ob Dokument jetzt im Index ist
-                    check_result = self.list_indexed_documents()
-                    logger.info(f"Post-indexing check: {check_result}")
-                    doc_indexed = document_id in check_result
-                    
-                    if doc_indexed:
-                        logger.info(f"Document {document_id} successfully verified in index")
-                    else:
-                        logger.warning(f"Document {document_id} not found in index after indexing attempt")
-                except Exception as check_error:
-                    logger.error(f"Error checking indexing result: {str(check_error)}")
+                # Verify the document was indexed
+                indexed_docs = self.list_indexed_documents()
+                logger.info(f"Post-indexing check: {indexed_docs}")
+                
+                if document_id in indexed_docs:
+                    logger.info(f"Document {document_id} successfully indexed")
+                else:
+                    logger.warning(f"Document {document_id} not found in index after indexing attempt")
                 
                 logger.info(f"Successfully indexed document {document_name} with {len(points)} chunks")
                 return True
@@ -323,7 +310,7 @@ class QdrantService:
         except Exception as e:
             logger.error(f"Error indexing document {document_name}: {str(e)}")
             logger.error(traceback.format_exc())
-            return False  # Return False instead of raising to prevent service crashes
+            raise
     
     def search(self, query, top_k=5):
         """Search for similar documents"""
@@ -339,10 +326,7 @@ class QdrantService:
                 return []
                 
             collection_info = self.client.get_collection(self.collection_name)
-            
-            # Check points_count instead of vectors_count
-            points_count = getattr(collection_info, 'points_count', 0)
-            if not points_count:
+            if collection_info.points_count == 0:
                 logger.warning(f"Collection {self.collection_name} has no points")
                 return []
             
@@ -355,7 +339,8 @@ class QdrantService:
             search_result = self.client.search(
                 collection_name=self.collection_name,
                 query_vector=query_embedding.tolist(),
-                limit=top_k
+                limit=top_k,
+                with_payload=True
             )
             
             logger.info(f"Found {len(search_result)} results")
@@ -375,78 +360,49 @@ class QdrantService:
             if not isinstance(text, str):
                 logger.warning(f"Invalid text type: {type(text)}")
                 return []
-                
-            # Simple splitting by paragraphs first, then by sentences
-            paragraphs = text.split('\n\n')
-            chunks = []
             
+            # For very short texts, just return as a single chunk
+            if len(text) < chunk_size:
+                return [text]
+                
+            # Split text into sentences (simple approach)
+            sentences = text.replace('\n', ' ').split('. ')
+            sentences = [s.strip() + '.' for s in sentences if s.strip()]
+            
+            chunks = []
             current_chunk = []
             current_size = 0
             
-            for paragraph in paragraphs:
-                # Skip empty paragraphs
-                if not paragraph.strip():
-                    continue
-                    
-                # Approximate size by character count
-                para_size = len(paragraph)
+            for sentence in sentences:
+                # Approximate size by word count (rough estimate)
+                sentence_size = len(sentence.split())
                 
-                if current_size + para_size > chunk_size * 4 and current_chunk:  # Using character count instead of word count
-                    # Current chunk is full, save it
-                    chunks.append('\n\n'.join(current_chunk))
+                if current_size + sentence_size > chunk_size and current_chunk:
+                    # Chunk is full, add it to chunks
+                    chunks.append(' '.join(current_chunk))
                     
-                    # Start new chunk with overlap (keep the last 1-2 paragraphs)
-                    overlap_start = max(0, len(current_chunk) - 2)  # Keep last 2 paragraphs for overlap
+                    # Start new chunk with overlap
+                    overlap_start = max(0, len(current_chunk) - overlap)
                     current_chunk = current_chunk[overlap_start:]
-                    current_size = sum(len(p) for p in current_chunk)
+                    current_size = sum(len(s.split()) for s in current_chunk)
                 
-                # Add paragraph to current chunk
-                current_chunk.append(paragraph)
-                current_size += para_size
-                
-                # If a single paragraph is very large, split it further
-                if para_size > chunk_size * 3:
-                    # Split large paragraph into sentences
-                    sentences = paragraph.replace('\n', ' ').split('. ')
-                    sentences = [s.strip() + '.' for s in sentences if s.strip()]
-                    
-                    # Reset the current chunk with just the large paragraph
-                    current_chunk = []
-                    current_size = 0
-                    
-                    sentence_chunk = []
-                    sentence_size = 0
-                    
-                    for sentence in sentences:
-                        # Skip empty sentences
-                        if not sentence.strip():
-                            continue
-                            
-                        sent_size = len(sentence)
-                        
-                        if sentence_size + sent_size > chunk_size * 3 and sentence_chunk:
-                            # Save the sentence chunk
-                            chunks.append(' '.join(sentence_chunk))
-                            
-                            # Overlap for sentences
-                            overlap_start = max(0, len(sentence_chunk) - 3)  # Keep last 3 sentences
-                            sentence_chunk = sentence_chunk[overlap_start:]
-                            sentence_size = sum(len(s) for s in sentence_chunk)
-                        
-                        sentence_chunk.append(sentence)
-                        sentence_size += sent_size
-                    
-                    # Add the last sentence chunk if not empty
-                    if sentence_chunk:
-                        chunks.append(' '.join(sentence_chunk))
+                # Add sentence to current chunk
+                current_chunk.append(sentence)
+                current_size += sentence_size
             
             # Add the last chunk if not empty
             if current_chunk:
-                chunks.append('\n\n'.join(current_chunk))
-            
-            logger.info(f"Created {len(chunks)} chunks from document")
+                chunks.append(' '.join(current_chunk))
+                
+            # Ensure we return at least one chunk
+            if not chunks and text:
+                chunks = [text]
+                
             return chunks
         except Exception as e:
             logger.error(f"Error chunking text: {str(e)}")
             logger.error(traceback.format_exc())
+            # Fallback: return original text as a single chunk
+            if text:
+                return [text]
             return []

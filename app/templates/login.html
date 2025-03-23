@@ -39,7 +39,7 @@
         </div>
         {% endif %}
         
-        <form method="post" action="/login">
+        <form method="post" action="/login" id="loginForm">
             <div class="mb-3">
                 <label for="username" class="form-label">Benutzername</label>
                 <input type="text" class="form-control" id="username" name="username" value="immobilien_admin" required>
@@ -48,6 +48,8 @@
                 <label for="password" class="form-label">Passwort</label>
                 <input type="password" class="form-control" id="password" name="password" value="S3cur3P@ssw0rd2025" required>
             </div>
+            <!-- Hidden field for redirect URL, will be populated by JavaScript -->
+            <input type="hidden" id="redirect_url" name="redirect_url" value="">
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary">Anmelden</button>
             </div>
@@ -59,5 +61,21 @@
             </small>
         </div>
     </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get redirect URL from localStorage if available
+        const redirectUrl = localStorage.getItem('redirect_after_login');
+        if (redirectUrl) {
+            document.getElementById('redirect_url').value = redirectUrl;
+        }
+        
+        // Clear any existing tokens that might be invalid
+        localStorage.removeItem('access_token');
+        document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+        console.log("Login form ready. Redirect URL:", redirectUrl || "None specified");
+    });
+    </script>
 </body>
 </html>

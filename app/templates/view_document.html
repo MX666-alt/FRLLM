@@ -34,7 +34,6 @@
     <div class="card-header">Debug Information</div>
     <div class="card-body">
         <p><strong>Dokumentpfad:</strong> <code>{{ document.path }}</code></p>
-        <p><strong>Dokument ID:</strong> <code>{{ document.id }}</code></p>
         <p><strong>Inhaltslänge:</strong> <code>{{ document.content|length }} Zeichen</code></p>
     </div>
 </div>
@@ -47,6 +46,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const indexButton = document.getElementById('indexButton');
     const errorContainer = document.getElementById('errorContainer');
     const successContainer = document.getElementById('successContainer');
+    
+    // Function to get auth token
+    function getAuthToken() {
+        // Try localStorage first
+        let token = localStorage.getItem('access_token');
+        
+        // If not in localStorage, try cookies
+        if (!token) {
+            const tokenCookie = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('access_token='));
+            if (tokenCookie) {
+                token = tokenCookie.split('=')[1];
+            }
+        }
+        
+        return token;
+    }
+    
+    // Function to handle authentication failure
+    function handleAuthFailure() {
+        console.error('Authentication failed or token expired');
+        // Save current URL to return after login
+        localStorage.setItem('redirect_after_login', window.location.href);
+        // Redirect to login page
+        window.location.href = '/login';
+    }
     
     if (indexButton) {
         indexButton.addEventListener('click', async function() {
@@ -66,60 +92,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(`Sending indexing request for: ${documentPath}`);
                 console.log(`Encoded path: ${encodedPath}`);
                 
-                // Get the token from cookie or localStorage
-                const token = document.cookie
-                    .split('; ')
-                    .find(row => row.startsWith('access_token='))
-                    ?.split('=')[1] || localStorage.getItem('access_token');
+                // Get auth token
+                const token = getAuthToken();
+                if (!token) {
+                    handleAuthFailure();
+                    return;
+                }
                 
+                // Log token (masked)
+                console.log(`Auth token available: ${token ? 'Yes (length: ' + token.length + ')' : 'No'}`);
+                
+                // Create fresh fetch request with proper headers
                 const response = await fetch(`/api/documents/index/${encodedPath}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token || ''}`
-                    }
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({}) // Empty body but ensure it's a valid JSON
                 });
                 
                 console.log(`Response status: ${response.status}`);
                 
-                // Versuche immer, eine JSON-Antwort zu bekommen
-                let responseData;
-                try {
-                    responseData = await response.json();
-                } catch (parseError) {
-                    responseData = { 
-                        detail: `Konnte Antwort nicht parsen: ${response.statusText}`,
-                        raw: await response.text()
-                    };
-                    console.error('Error parsing response:', parseError);
+                // Check for authentication error
+                if (response.status === 401 || response.status === 403) {
+                    handleAuthFailure();
+                    return;
                 }
                 
-                console.log('Response data:', responseData);
-                
                 if (response.ok) {
-                    console.log('Indexing successful:', responseData);
+                    const result = await response.json();
+                    console.log('Indexing successful:', result);
                     
                     // Show success message
                     this.innerHTML = 'Indiziert ✓';
                     this.classList.remove('btn-primary');
                     this.classList.add('btn-success');
                     
-                    // Detaillierte Erfolgsanzeige
-                    successContainer.innerHTML = `
-                        <p>Dokument wurde erfolgreich indiziert!</p>
-                        <p>Details: ${responseData.message || 'Keine Details verfügbar'}</p>
-                        <p>Document ID: ${responseData.document_id || 'Keine ID verfügbar'}</p>
-                    `;
+                    successContainer.textContent = 'Dokument wurde erfolgreich indiziert!';
                     successContainer.style.display = 'block';
-                    
-                    // Nach erfolgreicher Indizierung, Qdrant-Status prüfen
-                    await checkQdrantStatus();
                 } else {
                     // Parse error message
                     let errorMessage = 'Fehler beim Indizieren des Dokuments.';
-                    
-                    if (responseData && responseData.detail) {
-                        errorMessage = responseData.detail;
+                    try {
+                        const error = await response.json();
+                        errorMessage = error.detail || errorMessage;
+                    } catch (e) {
+                        console.error('Error parsing error response:', e);
                     }
                     
                     console.error('Error indexing document:', errorMessage);
@@ -128,21 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     this.innerHTML = 'Indizieren';
                     this.disabled = false;
                     
-                    // Detaillierte Fehleranzeige
-                    errorContainer.innerHTML = `
-                        <h5>Fehler:</h5>
-                        <p>${errorMessage}</p>
-                        <div class="mt-2">
-                            <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#errorDetails">
-                                Technische Details anzeigen
-                            </button>
-                            <div class="collapse mt-2" id="errorDetails">
-                                <div class="card card-body">
-                                    <pre class="mb-0">${JSON.stringify(responseData, null, 2)}</pre>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                    errorContainer.textContent = `Fehler: ${errorMessage}`;
                     errorContainer.style.display = 'block';
                 }
             } catch (error) {
@@ -152,49 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.innerHTML = 'Indizieren';
                 this.disabled = false;
                 
-                errorContainer.innerHTML = `
-                    <h5>Ein Fehler ist aufgetreten:</h5>
-                    <p>${error.message}</p>
-                    <div class="mt-2">
-                        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#errorDetails">
-                            Technische Details anzeigen
-                        </button>
-                        <div class="collapse mt-2" id="errorDetails">
-                            <div class="card card-body">
-                                <pre class="mb-0">${error.stack || 'Keine Details verfügbar'}</pre>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                errorContainer.textContent = `Ein Fehler ist aufgetreten: ${error.message}`;
                 errorContainer.style.display = 'block';
             }
         });
     }
-    
-    // Funktion zum Prüfen des Qdrant-Status nach Indizierung
-    async function checkQdrantStatus() {
-        try {
-            const response = await fetch('/debug-qdrant');
-            const data = await response.json();
-            
-            console.log('Qdrant status after indexing:', data);
-            
-            // Füge Qdrant-Statusinformationen zum Erfolgscontainer hinzu
-            if (successContainer.style.display === 'block') {
-                const qdrantInfo = document.createElement('div');
-                qdrantInfo.className = 'mt-3 border-top pt-3';
-                qdrantInfo.innerHTML = `
-                    <h6>Qdrant Status:</h6>
-                    <p>Collection: ${data.our_collection}</p>
-                    <p>Indizierte Dokumente: ${data.indexed_docs_count}</p>
-                    <p>Dokument-IDs: ${JSON.stringify(data.indexed_docs)}</p>
-                `;
-                successContainer.appendChild(qdrantInfo);
-            }
-        } catch (error) {
-            console.error('Error checking Qdrant status:', error);
-        }
-    }
 });
 </script>
 {% endblock %}
+

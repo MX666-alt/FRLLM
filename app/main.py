@@ -13,6 +13,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from dropbox.exceptions import AuthError
+from typing import Optional
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -94,7 +95,12 @@ async def login_page(request: Request):
     return templates.TemplateResponse("login.html", {"request": request})
 
 @app.post("/login")
-async def login(request: Request, username: str = Form(...), password: str = Form(...)):
+async def login(
+    request: Request, 
+    username: str = Form(...), 
+    password: str = Form(...), 
+    redirect_url: Optional[str] = Form(None)
+):
     logger.info(f"Login attempt for user: {username}")
     admin_user = get_admin_user()
     
@@ -114,8 +120,12 @@ async def login(request: Request, username: str = Form(...), password: str = For
     
     logger.info(f"Successful login for user: {username}")
     
+    # Determine redirect URL (default to home page)
+    redirect_to = redirect_url if redirect_url else "/"
+    logger.info(f"Redirecting after login to: {redirect_to}")
+    
     # Create redirect response
-    response = RedirectResponse(url="/", status_code=303)
+    response = RedirectResponse(url=redirect_to, status_code=303)
     
     # Set token in both cookie and localStorage via script
     response.set_cookie(
@@ -130,7 +140,7 @@ async def login(request: Request, username: str = Form(...), password: str = For
     token_script = f"""
     <script>
     localStorage.setItem('access_token', '{access_token}');
-    window.location.href = '/';
+    window.location.href = '{redirect_to}';
     </script>
     """
     
@@ -145,6 +155,7 @@ async def logout():
     token_script = f"""
     <script>
     localStorage.removeItem('access_token');
+    localStorage.removeItem('redirect_after_login');
     window.location.href = '/login';
     </script>
     """
@@ -340,13 +351,20 @@ async def search_page(request: Request):
 @app.get("/check-auth")
 async def check_auth(request: Request):
     logger.info("Auth check requested")
-    auth_header = request.cookies.get("access_token")
+    auth_header = request.headers.get("Authorization") 
+    
+    if not auth_header and "access_token" in request.cookies:
+        auth_header = f"Bearer {request.cookies.get('access_token')}"
+    
     if not auth_header:
-        logger.warning("No auth token found in cookies")
+        logger.warning("No auth token found in headers or cookies")
         return JSONResponse({"authenticated": False})
     
     try:
-        payload = jwt.decode(auth_header, SECRET_KEY, algorithms=[ALGORITHM])
+        # Extract the token from the Bearer header
+        token = auth_header.replace("Bearer ", "") if auth_header.startswith("Bearer ") else auth_header
+        
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if not username:
             logger.warning("Invalid token: no username")
@@ -376,79 +394,6 @@ async def http_exception_handler(request: Request, exc: HTTPException):
         "status_code": exc.status_code,
         "detail": exc.detail
     })
-
-@app.get("/debug-qdrant")
-async def debug_qdrant():
-    """Debug-Endpunkt für Qdrant-Operationen"""
-    try:
-        # Alle Collections auflisten
-        collections = qdrant_service.client.get_collections()
-        collection_names = [collection.name for collection in collections.collections]
-        
-        # Prüfen, ob unsere Collection existiert
-        our_collection = qdrant_service.collection_name
-        collection_exists = our_collection in collection_names
-        
-        # Details zur Collection abrufen, falls sie existiert
-        collection_info = None
-        if collection_exists:
-            collection_info = qdrant_service.client.get_collection(our_collection)
-        
-        # Direkte Abfrage nach indizierten Dokumenten
-        indexed_docs = qdrant_service.list_indexed_documents()
-        
-        # Direkte Abfrage von Punkten aus der Collection
-        points_sample = []
-        if collection_exists:
-            scroll_result = qdrant_service.client.scroll(
-                collection_name=our_collection,
-                limit=5,
-                with_payload=True,
-                with_vectors=False
-            )
-            points_sample = [
-                {
-                    "id": point.id,
-                    "payload": point.payload
-                }
-                for point in scroll_result[0]
-            ]
-        
-        # Alternative Abfrage für beide Collections
-        alternative_docs = {}
-        for collection in collection_names:
-            try:
-                # Versuche, einen scrollenden Abruf von beiden Collections durchzuführen
-                scroll_result = qdrant_service.client.scroll(
-                    collection_name=collection,
-                    limit=5,
-                    with_payload=True,
-                    with_vectors=False
-                )
-                
-                # Extrahiere document_ids aus den Payloads
-                doc_ids = set()
-                for point in scroll_result[0]:
-                    if 'document_id' in point.payload:
-                        doc_ids.add(point.payload['document_id'])
-                
-                alternative_docs[collection] = list(doc_ids)
-            except Exception as e:
-                alternative_docs[collection] = f"Fehler: {str(e)}"
-        
-        return {
-            "collections": collection_names,
-            "our_collection": our_collection,
-            "collection_exists": collection_exists,
-            "collection_info": str(collection_info) if collection_info else None,
-            "indexed_docs_count": len(indexed_docs),
-            "indexed_docs": indexed_docs,
-            "points_sample": points_sample,
-            "alternative_docs": alternative_docs
-        }
-    except Exception as e:
-        logger.exception(f"Error in Qdrant debug endpoint: {str(e)}")
-        return {"error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn

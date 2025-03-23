@@ -64,21 +64,21 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
         path = unquote(path)
         logger.info(f"Indexing document: {path}")
         
-        # Get document content
-        logger.info(f"Requesting content from Dropbox for path: /{path}")
-        content = dropbox_service.download_file(f"/{path}")
-        
+        # Get document content - Create a fresh new download to avoid issues with streams
+        content = None
+        try:
+            content = dropbox_service.download_file(f"/{path}")
+        except Exception as e:
+            logger.error(f"Error downloading file for indexing: {e}")
+            raise HTTPException(status_code=500, detail=f"Error downloading file: {str(e)}")
+            
         if not content:
             logger.error(f"Document not found or empty: {path}")
             raise HTTPException(status_code=404, detail="Document not found or could not be downloaded")
         
-        # Log content stats
-        logger.info(f"Document content received. Length: {len(content)} characters")
-        logger.info(f"Content preview (first 200 chars): {content[:200]}")
-        
         # Get document information
         doc_name = path.rsplit('/', 1)[-1]
-        logger.info(f"Document name: {doc_name}")
+        logger.info(f"Document name: {doc_name}, content length: {len(content)} characters")
         
         # Special handling for very small or large documents
         if len(content) < 10:
@@ -87,7 +87,6 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
         
         # Index document
         try:
-            logger.info(f"Starting indexing for document: {path}")
             success = qdrant_service.index_document(
                 document_id=path,
                 document_path=f"/{path}",
@@ -95,14 +94,8 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
                 document_content=content
             )
             
-            logger.info(f"Indexing result: {success}")
-            
             if not success:
                 logger.error(f"Failed to index document: {path}")
-                # Detaillierte Debugging-Info
-                indexed_docs = qdrant_service.list_indexed_documents()
-                logger.info(f"Current indexed documents: {indexed_docs}")
-                
                 raise HTTPException(status_code=500, detail="Failed to index document")
             
             logger.info(f"Document indexed successfully: {path}")
@@ -146,7 +139,9 @@ async def search_documents(query: DocumentQuery, current_user: User = Depends(ge
                 answer="Es wurden keine Dokumente gefunden. Bitte indiziere zuerst einige Dokumente über die Dokumentenseite."
             )
         
-        logger.info(f"Found {len(indexed_docs)} indexed documents: {indexed_docs}")
+        logger.info(f"Found {len(indexed_docs)} indexed documents")
+        if len(indexed_docs) <= 10:
+            logger.info(f"Indexed documents: {indexed_docs}")
         
         # Search for relevant document chunks
         logger.info(f"Searching for query: {query.query}")

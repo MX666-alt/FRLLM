@@ -1,0 +1,293 @@
+2025-03-23 14:07:37,769 - dropbox_sync - INFO - Starte Dropbox Synchronisierung...
+2025-03-23 14:07:37,769 - dropbox_sync - INFO - Starte Synchronisierung...
+2025-03-23 14:07:37,781 - dropbox_sync - INFO - Hole alle Dokumente aus Dropbox...
+2025-03-23 14:07:37,787 - dropbox_sync - INFO - Verarbeite Pfad: 
+2025-03-23 14:07:38,048 - dropbox_sync - INFO - 3 Dokumente/Ordner in Pfad  gefunden
+2025-03-23 14:07:38,049 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts
+2025-03-23 14:07:38,397 - dropbox_sync - INFO - 48 Dokumente/Ordner in Pfad /Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts gefunden
+2025-03-23 14:07:38,397 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen
+2025-03-23 14:07:38,678 - dropbox_sync - INFO - 23 Dokumente/Ordner in Pfad /Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen gefunden
+2025-03-23 14:07:38,680 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links
+2025-03-23 14:07:38,947 - dropbox_sync - INFO - 14 Dokumente/Ordner in Pfad /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links gefunden
+2025-03-23 14:07:38,947 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Bilder
+2025-03-23 14:07:39,227 - dropbox_sync - INFO - 21 Dokumente/Ordner in Pfad /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Bilder gefunden
+2025-03-23 14:07:39,227 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen
+2025-03-23 14:07:39,510 - dropbox_sync - INFO - 11 Dokumente/Ordner in Pfad /Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen gefunden
+2025-03-23 14:07:39,511 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts
+2025-03-23 14:07:39,784 - dropbox_sync - INFO - 9 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts gefunden
+2025-03-23 14:07:39,784 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder
+2025-03-23 14:07:40,042 - dropbox_sync - INFO - 4 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder gefunden
+2025-03-23 14:07:40,042 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder I
+2025-03-23 14:07:40,303 - dropbox_sync - INFO - 15 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder I gefunden
+2025-03-23 14:07:40,303 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder II
+2025-03-23 14:07:40,566 - dropbox_sync - INFO - 12 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder II gefunden
+2025-03-23 14:07:40,567 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder IV (Inserat)
+2025-03-23 14:07:40,831 - dropbox_sync - INFO - 12 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder IV (Inserat) gefunden
+2025-03-23 14:07:40,832 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder III
+2025-03-23 14:07:41,114 - dropbox_sync - INFO - 13 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/01_Bilder/Bilder III gefunden
+2025-03-23 14:07:41,114 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)
+2025-03-23 14:07:41,412 - dropbox_sync - INFO - 16 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.) gefunden
+2025-03-23 14:07:41,412 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG
+2025-03-23 14:07:41,669 - dropbox_sync - INFO - 2 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG gefunden
+2025-03-23 14:07:41,669 - dropbox_sync - INFO - Verarbeite Pfad: /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter
+2025-03-23 14:07:41,935 - dropbox_sync - INFO - 21 Dokumente/Ordner in Pfad /Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter gefunden
+2025-03-23 14:07:41,936 - dropbox_sync - INFO - Insgesamt 126 Dokumente gefunden
+2025-03-23 14:07:41,937 - dropbox_sync - INFO - 126 Dokumente in Dropbox gefunden
+2025-03-23 14:07:41,937 - dropbox_sync - INFO - Hole indexierte Dokumente...
+2025-03-23 14:07:42,051 - dropbox_sync - INFO - 2 Dokumente im Index gefunden
+2025-03-23 14:07:42,051 - dropbox_sync - INFO - 126 neue Dokumente zu indizieren
+2025-03-23 14:07:42,051 - dropbox_sync - INFO - 2 Dokumente zu entfernen
+2025-03-23 14:07:42,051 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Energieausweis.pdf
+2025-03-23 14:07:43,318 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Energieausweis.pdf
+2025-03-23 14:07:44,319 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2024-09.pdf
+2025-03-23 14:07:46,079 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2024-09.pdf
+2025-03-23 14:07:47,079 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/SV-Gutachten Elektroarbeiten.pdf
+2025-03-23 14:07:48,827 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/SV-Gutachten Elektroarbeiten.pdf
+2025-03-23 14:07:49,827 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Mietvertrag Kraus - Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:07:50,965 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Mietvertrag Kraus - Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:07:51,966 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundrisse Whg 102 (bemasst) Flaechenberechnung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:07:52,922 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundrisse Whg 102 (bemasst) Flaechenberechnung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:07:53,923 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Lageplan Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:07:54,725 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Lageplan Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:07:55,726 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2020-12.pdf
+2025-03-23 14:08:13,804 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2020-12.pdf
+2025-03-23 14:08:14,805 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundriss.pdf
+2025-03-23 14:08:15,751 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundriss.pdf
+2025-03-23 14:08:16,752 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/WiPl 2023.pdf
+2025-03-23 14:08:17,558 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/WiPl 2023.pdf
+2025-03-23 14:08:18,559 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Fernwärme Preismitteilung Schlesienstraße.pdf
+2025-03-23 14:08:19,441 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Fernwärme Preismitteilung Schlesienstraße.pdf
+2025-03-23 14:08:20,442 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundrisse (bemaßt) | Flächenberechnung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:08:23,064 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundrisse (bemaßt) | Flächenberechnung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:08:24,065 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Checkliste Ankaufsprüfung.pdf
+2025-03-23 14:08:28,506 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Checkliste Ankaufsprüfung.pdf
+2025-03-23 14:08:29,507 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Schle - Übergabeprotokoll Bohne.pdf
+2025-03-23 14:08:30,415 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Schle - Übergabeprotokoll Bohne.pdf
+2025-03-23 14:08:31,416 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/SV-Gutachten Elektrik Schlesienstraße.pdf
+2025-03-23 14:08:33,183 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/SV-Gutachten Elektrik Schlesienstraße.pdf
+2025-03-23 14:08:34,184 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Aufstellung Sanierungsmaßnahmen.pdf
+2025-03-23 14:08:35,425 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Aufstellung Sanierungsmaßnahmen.pdf
+2025-03-23 14:08:36,426 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:08:37,623 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:08:38,625 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Mieterhöhungsverlangen - Schlesienstraße.pdf
+2025-03-23 14:08:39,516 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Mieterhöhungsverlangen - Schlesienstraße.pdf
+2025-03-23 14:08:40,517 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/WiPl 2024.pdf
+2025-03-23 14:08:41,782 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/WiPl 2024.pdf
+2025-03-23 14:08:42,783 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2023-11.pdf
+2025-03-23 14:08:44,454 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2023-11.pdf
+2025-03-23 14:08:45,455 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2021-12.pdf
+2025-03-23 14:09:17,114 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2021-12.pdf
+2025-03-23 14:09:18,115 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2022-08.pdf
+2025-03-23 14:09:48,999 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Protokoll WEV 2022-08.pdf
+2025-03-23 14:09:50,000 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundbuch - Schlesienstraße 1, 53119 Bonn (Okt 2023.pdf
+2025-03-23 14:09:51,467 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Objektunterlagen/Grundbuch - Schlesienstraße 1, 53119 Bonn (Okt 2023.pdf
+2025-03-23 14:09:52,468 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Grundsteuerbescheid.pdf
+2025-03-23 14:09:53,474 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Grundsteuerbescheid.pdf
+2025-03-23 14:09:54,474 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auftrag zur Auszahlung des Darlehens.pdf
+2025-03-23 14:09:55,756 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auftrag zur Auszahlung des Darlehens.pdf
+2025-03-23 14:09:56,756 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023 - Korrektur.pdf
+2025-03-23 14:09:59,940 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023 - Korrektur.pdf
+2025-03-23 14:10:00,941 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Checkliste Dokumente.docx
+2025-03-23 14:10:02,029 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Checkliste Dokumente.docx
+2025-03-23 14:10:03,031 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Eintragungsbekanntmachung.pdf
+2025-03-23 14:10:04,404 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Eintragungsbekanntmachung.pdf
+2025-03-23 14:10:05,405 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertrag Schlesienstraße  761-2023 B.pdf
+2025-03-23 14:10:07,419 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertrag Schlesienstraße  761-2023 B.pdf
+2025-03-23 14:10:08,419 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben erneute Nebenkostenabrechnung.pdf
+2025-03-23 14:10:09,673 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben erneute Nebenkostenabrechnung.pdf
+2025-03-23 14:10:10,675 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben Kabelfernsehen.docx
+2025-03-23 14:10:12,401 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben Kabelfernsehen.docx
+2025-03-23 14:10:13,403 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Fernwärmeliefervertrag Schlesienstraße 1.pdf
+2025-03-23 14:10:14,820 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Fernwärmeliefervertrag Schlesienstraße 1.pdf
+2025-03-23 14:10:15,822 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023 - von Hansen.pdf
+2025-03-23 14:10:29,420 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023 - von Hansen.pdf
+2025-03-23 14:10:30,421 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben neue Bankverbindung.pdf
+2025-03-23 14:10:31,475 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben neue Bankverbindung.pdf
+2025-03-23 14:10:32,475 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertragsentwurf Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:10:56,761 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertragsentwurf Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:10:57,762 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_Willkommensschreiben.pdf
+2025-03-23 14:10:58,981 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_Willkommensschreiben.pdf
+2025-03-23 14:10:59,982 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung I Nov 23.docx
+2025-03-23 14:11:01,624 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung I Nov 23.docx
+2025-03-23 14:11:02,626 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertragsentwurf Schlesienstraße 1, 53119 Bonn (30.05.23).pdf
+2025-03-23 14:11:27,147 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufvertragsentwurf Schlesienstraße 1, 53119 Bonn (30.05.23).pdf
+2025-03-23 14:11:28,148 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_SEPA Lastschriftmandat Grundsteuern.pdf
+2025-03-23 14:11:29,172 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_SEPA Lastschriftmandat Grundsteuern.pdf
+2025-03-23 14:11:30,173 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung Nov 23 (scan).pdf
+2025-03-23 14:11:31,300 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung Nov 23 (scan).pdf
+2025-03-23 14:11:32,300 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufpreisfälligkeit.pdf
+2025-03-23 14:11:33,595 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Kaufpreisfälligkeit.pdf
+2025-03-23 14:11:34,597 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Einheitswertbescheid.pdf
+2025-03-23 14:11:36,054 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Einheitswertbescheid.pdf
+2025-03-23 14:11:37,055 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Bestellung Finanzierungspfandrecht 922-2023 B.pdf
+2025-03-23 14:11:38,693 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Not_Bestellung Finanzierungspfandrecht 922-2023 B.pdf
+2025-03-23 14:11:39,695 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung I Nov 23.pdf
+2025-03-23 14:11:40,781 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mahnung I Nov 23.pdf
+2025-03-23 14:11:41,782 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_SEPA-Lastschriftmandat.pdf
+2025-03-23 14:11:42,609 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_SEPA-Lastschriftmandat.pdf
+2025-03-23 14:11:43,610 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Sons_Anschreiben - Rückantwort Gutachterausschuss.pdf
+2025-03-23 14:11:44,743 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Sons_Anschreiben - Rückantwort Gutachterausschuss.pdf
+2025-03-23 14:11:45,744 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Mak_LoI Schlesienstraße 1, 53119 Bonn.doc
+2025-03-23 14:11:51,090 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Mak_LoI Schlesienstraße 1, 53119 Bonn.doc
+2025-03-23 14:11:52,091 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auszahlungsbestätigung Darlehen.pdf
+2025-03-23 14:11:53,130 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auszahlungsbestätigung Darlehen.pdf
+2025-03-23 14:11:54,131 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben erneute Nebenkostenabrechnung.docx
+2025-03-23 14:11:56,103 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben erneute Nebenkostenabrechnung.docx
+2025-03-23 14:11:57,104 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_SEPA Lastschrift Mandatsreferenz Commerzbank.pdf
+2025-03-23 14:11:57,997 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_SEPA Lastschrift Mandatsreferenz Commerzbank.pdf
+2025-03-23 14:11:58,998 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Schreiben Mieterberatung SPD.pdf
+2025-03-23 14:12:00,082 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Schreiben Mieterberatung SPD.pdf
+2025-03-23 14:12:01,082 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auftrag Darlehensauszahlung.pdf
+2025-03-23 14:12:02,187 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Auftrag Darlehensauszahlung.pdf
+2025-03-23 14:12:03,188 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben Kabelfernsehen.pdf
+2025-03-23 14:12:04,482 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben Kabelfernsehen.pdf
+2025-03-23 14:12:05,484 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Bescheid Grundsteuermessbetrag.pdf
+2025-03-23 14:12:06,584 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Bescheid Grundsteuermessbetrag.pdf
+2025-03-23 14:12:07,585 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_ESIS-Merkblatt inkl Tilgungsplan.pdf
+2025-03-23 14:12:08,900 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_ESIS-Merkblatt inkl Tilgungsplan.pdf
+2025-03-23 14:12:09,902 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mieterhöhungsverlangen Kraus.docx
+2025-03-23 14:12:11,546 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mieterhöhungsverlangen Kraus.docx
+2025-03-23 14:12:12,548 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Darlehensvertrag Schlesienstraße.pdf
+2025-03-23 14:12:14,547 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Darlehensvertrag Schlesienstraße.pdf
+2025-03-23 14:12:15,548 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023.pdf
+2025-03-23 14:12:18,531 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Nebenkostenabrechnung 2023.pdf
+2025-03-23 14:12:19,532 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_SEPA-Lastschrift Schlesienstraße 1.pdf
+2025-03-23 14:12:20,668 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_SEPA-Lastschrift Schlesienstraße 1.pdf
+2025-03-23 14:12:21,669 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mieterhöhungsverlangen Kraus.pdf
+2025-03-23 14:12:22,846 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_Mieterhöhungsverlangen Kraus.pdf
+2025-03-23 14:12:23,847 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_Sonderumlage Schlesienstraße 1 - Boiler.pdf
+2025-03-23 14:12:24,728 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/HV_Sonderumlage Schlesienstraße 1 - Boiler.pdf
+2025-03-23 14:12:25,729 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Mak_LoI Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:12:32,568 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Mak_LoI Schlesienstraße 1, 53119 Bonn.pdf
+2025-03-23 14:12:33,569 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben neue Bankverbindung.docx
+2025-03-23 14:12:35,298 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Miet_ Anschreiben neue Bankverbindung.docx
+2025-03-23 14:12:36,301 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Grundsteuer Dez 2024.pdf
+2025-03-23 14:12:37,439 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/FA_Grundsteuer Dez 2024.pdf
+2025-03-23 14:12:38,441 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Tilgungsplan CoBa.pdf
+2025-03-23 14:12:39,398 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 1, 53119 Bonn, Whg 102, 1OG, rechts/Bank_Tilgungsplan CoBa.pdf
+2025-03-23 14:12:40,399 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Protokoll WEV Sep 2024.pdf
+2025-03-23 14:12:42,362 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Protokoll WEV Sep 2024.pdf
+2025-03-23 14:12:43,364 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundbuch Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:12:44,357 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundbuch Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:12:45,358 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Wohnflächenberechnung Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:46,497 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Wohnflächenberechnung Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:47,498 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Aufteilungsplan Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:48,607 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Aufteilungsplan Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:49,609 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Lageplan Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:12:50,688 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Lageplan Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:12:51,689 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:53,173 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:54,174 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Energieausweis Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:55,210 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Energieausweis Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:12:56,211 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Energieausweis.pdf
+2025-03-23 14:12:57,377 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Energieausweis.pdf
+2025-03-23 14:12:58,378 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundriss Schlesienstraße 5, 2 OG, links, WE 205.pdf
+2025-03-23 14:12:59,237 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundriss Schlesienstraße 5, 2 OG, links, WE 205.pdf
+2025-03-23 14:13:00,239 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundbuch 6937, Schlesienstraße 5, 2OG, links.pdf
+2025-03-23 14:13:24,544 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsunterlagen/Grundbuch 6937, Schlesienstraße 5, 2OG, links.pdf
+2025-03-23 14:13:25,546 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Darlehensvertrag DKB.pdf
+2025-03-23 14:13:26,678 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Darlehensvertrag DKB.pdf
+2025-03-23 14:13:27,679 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/ESIS-Merkblatt - Tilgungsplan.pdf
+2025-03-23 14:13:28,854 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/ESIS-Merkblatt - Tilgungsplan.pdf
+2025-03-23 14:13:29,855 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Kaufvertrag Schlesienstraße 5 - 7 - 11 - 15.pdf
+2025-03-23 14:13:31,372 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Kaufvertrag Schlesienstraße 5 - 7 - 11 - 15.pdf
+2025-03-23 14:13:32,373 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/SWB Stromvertrag Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:13:51,716 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/SWB Stromvertrag Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:13:52,718 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsübergabeprotokoll Nr. 5.pdf
+2025-03-23 14:13:53,672 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsübergabeprotokoll Nr. 5.pdf
+2025-03-23 14:13:54,673 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Begrüßungsschreiben WE205.pdf
+2025-03-23 14:13:55,756 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Begrüßungsschreiben WE205.pdf
+2025-03-23 14:13:56,757 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/SWB Fernwärmeliefervertrag Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:13:57,897 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/SWB Fernwärmeliefervertrag Schlesienstraße 5, 53119 Bonn.pdf
+2025-03-23 14:13:58,898 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/sons_Antwortschreiben Gutachterausschuss.pdf
+2025-03-23 14:13:59,973 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/sons_Antwortschreiben Gutachterausschuss.pdf
+2025-03-23 14:14:00,973 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Strategieplan WG-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:03,698 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Strategieplan WG-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:04,700 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Strategieplan-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:18,201 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Strategieplan-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:19,203 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsübergabeprotokoll.pdf
+2025-03-23 14:14:20,255 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 5, 53119 Bonn, Whg 205, 2OG, links/Wohnungsübergabeprotokoll.pdf
+2025-03-23 14:14:21,255 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Lageplan Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:14:22,377 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Lageplan Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:14:23,379 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundbuch 6980, Schlesienstraße 7, 4OG, rechts.pdf
+2025-03-23 14:14:47,596 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundbuch 6980, Schlesienstraße 7, 4OG, rechts.pdf
+2025-03-23 14:14:48,598 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Wohnungsübergabeprotokoll Nr. 7.pdf
+2025-03-23 14:14:49,710 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Wohnungsübergabeprotokoll Nr. 7.pdf
+2025-03-23 14:14:50,711 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Aufteilungsplan Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:14:51,735 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Aufteilungsplan Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:14:52,737 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Strategieplan WG-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:55,724 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Strategieplan WG-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:14:56,725 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Energieausweis.pdf
+2025-03-23 14:14:58,199 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Energieausweis.pdf
+2025-03-23 14:14:59,201 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/sonst_Antwortschreiben Gutachterausschuss.pdf
+2025-03-23 14:15:00,304 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/sonst_Antwortschreiben Gutachterausschuss.pdf
+2025-03-23 14:15:01,305 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Angebot Whg Rüß.pdf
+2025-03-23 14:15:02,297 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Angebot Whg Rüß.pdf
+2025-03-23 14:15:03,300 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundbuch Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:15:04,523 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundbuch Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:15:05,523 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Strategieplan-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:15:18,808 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Strategieplan-Wohnungspaket Schlesienstraße.pdf
+2025-03-23 14:15:19,811 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Wohnflächenberechnung Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:20,775 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Wohnflächenberechnung Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:21,776 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundriss Schlesienstraße 7, 4 OG, rechts WE 408.pdf
+2025-03-23 14:15:22,679 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Grundriss Schlesienstraße 7, 4 OG, rechts WE 408.pdf
+2025-03-23 14:15:23,680 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Energieausweis Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:24,752 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Energieausweis Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:25,754 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:27,263 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/03_Kaufunterlagen (Grundrisse, Energieausweis etc.)/Teilungserklärung - Schlesienstraße 1-19, 53119 Bonn.pdf
+2025-03-23 14:15:28,264 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG/Begrüßungsschreiben WE408.pdf
+2025-03-23 14:15:29,253 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG/Begrüßungsschreiben WE408.pdf
+2025-03-23 14:15:30,254 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG/Protokoll WEV Sep 2024.pdf
+2025-03-23 14:15:32,047 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/02_WEG/Protokoll WEV Sep 2024.pdf
+2025-03-23 14:15:33,048 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Viola Shala Oktober 2024.pdf
+2025-03-23 14:15:34,492 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Viola Shala Oktober 2024.pdf
+2025-03-23 14:15:35,494 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsübergabeprotokoll Yllka.pdf
+2025-03-23 14:15:36,782 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsübergabeprotokoll Yllka.pdf
+2025-03-23 14:15:37,784 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (unterschrieben).pdf
+2025-03-23 14:16:17,574 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (unterschrieben).pdf
+2025-03-23 14:16:18,576 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (15qm).docx
+2025-03-23 14:16:19,961 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (15qm).docx
+2025-03-23 14:16:20,964 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (unterschrieben).pdf
+2025-03-23 14:16:57,046 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (unterschrieben).pdf
+2025-03-23 14:16:58,048 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Visa_Alma_Mashkulli.pdf
+2025-03-23 14:16:58,937 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Visa_Alma_Mashkulli.pdf
+2025-03-23 14:16:59,938 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Yllka Shala Oktober 2024.pdf
+2025-03-23 14:17:01,310 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Yllka Shala Oktober 2024.pdf
+2025-03-23 14:17:02,311 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Viola Shala Oktober 2024.docx
+2025-03-23 14:17:03,494 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Viola Shala Oktober 2024.docx
+2025-03-23 14:17:04,496 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Reisepass Alma Mashkulli.pdf
+2025-03-23 14:17:05,372 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Reisepass Alma Mashkulli.pdf
+2025-03-23 14:17:06,373 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsgeberbestaetigung Oktober 2024_Yllka Shala Viola Shala.pdf
+2025-03-23 14:17:08,341 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsgeberbestaetigung Oktober 2024_Yllka Shala Viola Shala.pdf
+2025-03-23 14:17:09,341 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Yllka Shala Oktober 2024.docx
+2025-03-23 14:17:10,719 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Miet_Übergabeprotokoll Yllka Shala Oktober 2024.docx
+2025-03-23 14:17:11,720 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm) en.pdf
+2025-03-23 14:17:45,005 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm) en.pdf
+2025-03-23 14:17:46,008 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (15qm).pdf
+2025-03-23 14:18:22,864 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (15qm).pdf
+2025-03-23 14:18:23,866 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsgeberbestätigung Alma.pdf
+2025-03-23 14:18:25,317 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsgeberbestätigung Alma.pdf
+2025-03-23 14:18:26,318 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm).pdf
+2025-03-23 14:19:03,899 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm).pdf
+2025-03-23 14:19:04,900 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm).docx
+2025-03-23 14:19:07,411 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Alma Mashkulli (21qm).docx
+2025-03-23 14:19:08,412 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (11qm).pdf
+2025-03-23 14:19:48,627 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (11qm).pdf
+2025-03-23 14:19:49,628 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (11qm).docx
+2025-03-23 14:19:50,927 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Viola Shala (11qm).docx
+2025-03-23 14:19:51,928 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsübergabeprotokoll Viola Shala.pdf
+2025-03-23 14:19:53,464 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Wohnungsübergabeprotokoll Viola Shala.pdf
+2025-03-23 14:19:54,465 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (unterschrieben).pdf
+2025-03-23 14:20:30,868 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/04_Mieter/Mietvertrag Yllka Shala (unterschrieben).pdf
+2025-03-23 14:20:31,870 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/SWB Fernwärmeliefervertrag Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:20:33,194 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/SWB Fernwärmeliefervertrag Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:20:34,195 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/SWB Stromvertrag Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:20:53,752 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/SWB Stromvertrag Schlesienstraße 7, 53119 Bonn.pdf
+2025-03-23 14:20:54,754 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/Kaufvertrag Schlesienstraße 5 - 7 - 11 - 15.pdf
+2025-03-23 14:20:56,046 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/Kaufvertrag Schlesienstraße 5 - 7 - 11 - 15.pdf
+2025-03-23 14:20:57,048 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/ESIS-Merkblatt - Tilgungsplan.pdf
+2025-03-23 14:20:58,425 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/ESIS-Merkblatt - Tilgungsplan.pdf
+2025-03-23 14:20:59,426 - dropbox_sync - INFO - Indiziere Dokument: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/Darlehensvertrag DKB.pdf
+2025-03-23 14:21:00,695 - dropbox_sync - INFO - Dokument erfolgreich indiziert: Schlesienstraße 7, 53119 Bonn, Whg 408, 4OG, rechts/Darlehensvertrag DKB.pdf
+2025-03-23 14:21:01,697 - dropbox_sync - INFO - Synchronisierung abgeschlossen. 126 Dokumente indiziert.
+2025-03-23 14:21:01,697 - dropbox_sync - INFO - Dropbox Synchronisierung erfolgreich abgeschlossen.

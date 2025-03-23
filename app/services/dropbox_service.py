@@ -7,6 +7,24 @@ import dropbox
 from dropbox.files import FileMetadata, FolderMetadata
 from dropbox.exceptions import ApiError, AuthError
 from dotenv import load_dotenv
+import io
+import re
+
+# PDF-Parsing Bibliotheken
+try:
+    from pdfminer.high_level import extract_text as pdf_extract_text
+    from pdfminer.pdfparser import PDFSyntaxError
+    HAS_PDFMINER = True
+except ImportError:
+    HAS_PDFMINER = False
+    logging.warning("pdfminer.six nicht installiert. PDF-Extraction wird eingeschränkt sein.")
+
+try:
+    import pypdf
+    HAS_PYPDF = True
+except ImportError:
+    HAS_PYPDF = False
+    logging.warning("PyPDF2/pypdf nicht installiert. Alternative PDF-Extraction wird nicht verfügbar sein.")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -101,6 +119,69 @@ class DropboxService:
             logger.error(f"Error listing files: {e}")
             return []
     
+    def _extract_text_from_pdf_with_pdfminer(self, file_content):
+        """Extract text from PDF using PDFMiner"""
+        try:
+            if not HAS_PDFMINER:
+                return None
+                
+            logger.info("Extracting text from PDF using PDFMiner")
+            pdf_file = io.BytesIO(file_content)
+            text = pdf_extract_text(pdf_file)
+            
+            # Clean up the text a bit
+            text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with single space
+            text = text.strip()
+            
+            logger.info(f"Extracted {len(text)} characters with PDFMiner")
+            return text
+        except PDFSyntaxError as e:
+            logger.error(f"PDFMiner syntax error: {e}")
+            return None
+        except Exception as e:
+            logger.error(f"Error extracting text with PDFMiner: {e}")
+            return None
+    
+    def _extract_text_from_pdf_with_pypdf(self, file_content):
+        """Extract text from PDF using PyPDF"""
+        try:
+            if not HAS_PYPDF:
+                return None
+                
+            logger.info("Extracting text from PDF using PyPDF")
+            pdf_file = io.BytesIO(file_content)
+            
+            with pypdf.PdfReader(pdf_file) as pdf:
+                text = ""
+                for page_num in range(len(pdf.pages)):
+                    page = pdf.pages[page_num]
+                    text += page.extract_text() + "\n"
+            
+            # Clean up the text
+            text = text.strip()
+            
+            logger.info(f"Extracted {len(text)} characters with PyPDF")
+            return text
+        except Exception as e:
+            logger.error(f"Error extracting text with PyPDF: {e}")
+            return None
+    
+    def _extract_text_from_pdf(self, file_content):
+        """Extract text from PDF using available methods"""
+        # Try with PDFMiner first (usually better quality)
+        text = self._extract_text_from_pdf_with_pdfminer(file_content)
+        
+        # If PDFMiner failed, try with PyPDF
+        if not text:
+            text = self._extract_text_from_pdf_with_pypdf(file_content)
+            
+        # If we got any text, return it
+        if text and len(text) > 10:  # Ensure we got meaningful text
+            return text
+            
+        # If all methods failed, return a helpful message
+        return "PDF konnte nicht analysiert werden. Möglicherweise ist es gescannt oder passwortgeschützt."
+    
     def download_file(self, path):
         """Download a file and return its content as text"""
         try:
@@ -113,9 +194,48 @@ class DropboxService:
             path = unquote(path)
             logger.info(f"Downloading file: {path}")
             metadata, response = self.client.files_download(path)
-            content = response.content.decode('utf-8')
-            logger.info(f"File downloaded successfully, size: {len(content)} bytes")
-            return content
+            content = response.content
+            
+            # Check file extension
+            is_pdf = path.lower().endswith('.pdf')
+            
+            # If it's a PDF, extract text
+            if is_pdf:
+                logger.info(f"File is a PDF, extracting text")
+                extracted_text = self._extract_text_from_pdf(content)
+                if extracted_text:
+                    logger.info(f"Successfully extracted text from PDF, size: {len(extracted_text)} bytes")
+                    return extracted_text
+                else:
+                    logger.warning(f"Failed to extract text from PDF")
+            
+            # Try to decode as text if not a PDF or if PDF extraction failed
+            try:
+                text_content = content.decode('utf-8')
+                logger.info(f"File decoded as UTF-8, size: {len(text_content)} bytes")
+                return text_content
+            except UnicodeDecodeError:
+                # If UTF-8 decoding fails, try other encodings
+                logger.warning(f"UTF-8 decoding failed for file: {path}")
+                
+                # Try common encodings
+                for encoding in ['latin-1', 'cp1252', 'iso-8859-1']:
+                    try:
+                        text_content = content.decode(encoding)
+                        logger.info(f"File decoded as {encoding}, size: {len(text_content)} bytes")
+                        return text_content
+                    except UnicodeDecodeError:
+                        continue
+                
+                # If all decodings fail and it's not a PDF, return a useful message
+                if not is_pdf:
+                    logger.warning(f"All text decodings failed for non-PDF file")
+                    return "Dieser Dateityp kann nicht als Text angezeigt werden."
+                else:
+                    # This should never happen as we already tried PDF extraction above
+                    logger.warning(f"Both PDF extraction and text decoding failed")
+                    return "PDF-Extraktion fehlgeschlagen. Die Datei ist möglicherweise beschädigt oder passwortgeschützt."
+                    
         except AuthError as e:
             logger.error(f"Dropbox authentication error downloading file: {e}")
             self._valid = False
@@ -123,23 +243,6 @@ class DropboxService:
         except ApiError as e:
             logger.error(f"Dropbox API error downloading file: {e}")
             return None
-        except UnicodeDecodeError:
-            # If UTF-8 decoding fails, try to use a temporary file
-            logger.warning(f"UTF-8 decoding failed for file: {path}")
-            try:
-                with tempfile.NamedTemporaryFile(delete=False) as temp:
-                    temp_path = temp.name
-                    metadata, response = self.client.files_download(path)
-                    temp.write(response.content)
-                
-                logger.info(f"File saved to temporary location: {temp_path}")
-                return "Dieser Dateityp kann nicht als Text angezeigt werden."
-            except Exception as e:
-                logger.error(f"Error processing non-text file: {e}")
-                return None
-            finally:
-                if 'temp_path' in locals():
-                    os.remove(temp_path)
         except Exception as e:
             logger.error(f"Error downloading file: {e}")
             return None
