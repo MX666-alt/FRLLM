@@ -64,14 +64,8 @@ async def index_document(path: str, current_user: User = Depends(get_current_use
         path = unquote(path)
         logger.info(f"Indexing document: {path}")
         
-        # Get document content - Create a fresh new download to avoid issues with streams
-        content = None
-        try:
-            content = dropbox_service.download_file(f"/{path}")
-        except Exception as e:
-            logger.error(f"Error downloading file for indexing: {e}")
-            raise HTTPException(status_code=500, detail=f"Error downloading file: {str(e)}")
-            
+        # Get document content
+        content = dropbox_service.download_file(f"/{path}")
         if not content:
             logger.error(f"Document not found or empty: {path}")
             raise HTTPException(status_code=404, detail="Document not found or could not be downloaded")
@@ -139,9 +133,7 @@ async def search_documents(query: DocumentQuery, current_user: User = Depends(ge
                 answer="Es wurden keine Dokumente gefunden. Bitte indiziere zuerst einige Dokumente über die Dokumentenseite."
             )
         
-        logger.info(f"Found {len(indexed_docs)} indexed documents")
-        if len(indexed_docs) <= 10:
-            logger.info(f"Indexed documents: {indexed_docs}")
+        logger.info(f"Found {len(indexed_docs)} indexed documents: {indexed_docs}")
         
         # Search for relevant document chunks
         logger.info(f"Searching for query: {query.query}")
@@ -169,14 +161,15 @@ async def search_documents(query: DocumentQuery, current_user: User = Depends(ge
             logger.info(f"LLM answer: {answer[:100]}...")
         except Exception as e:
             logger.exception(f"Error generating LLM answer: {str(e)}")
-            # Provide a fallback if LLM fails
-            answer = f"**Anfrage:** {query.query}\n\n"
+            # Detailliertere Fehlermeldung erstellen
+            answer = f"Bei der Verarbeitung Ihrer Anfrage '{query.query}' ist ein Fehler aufgetreten.\n\n"
+            answer += "Hier sind die gefundenen relevanten Informationen ohne KI-Analyse:\n\n"
+            # Füge die rohen Suchergebnisse hinzu
             if search_results:
-                answer += "**Relevante Dokumente gefunden:**\n\n"
-                for i, result in enumerate(search_results[:3], 1):
+                for i, result in enumerate(search_results[:5], 1):
                     doc_name = result.payload.get("document_name", "Unbekanntes Dokument")
                     text = result.payload.get("text", "").strip()
-                    answer += f"**{i}. {doc_name}**\n\n{text}\n\n"
+                    answer += f"**Dokument {i}: {doc_name}**\n\n{text}\n\n"
             else:
                 answer += "Es wurden keine relevanten Dokumente gefunden."
         
@@ -203,3 +196,37 @@ async def debug_llm(current_user: User = Depends(get_current_user), prompt: str 
     logger.info("Debug LLM API call")
     result = await llm_service.debug_api_call(prompt)
     return result
+
+@router.get("/system-check")
+async def system_check(current_user: User = Depends(get_current_user)):
+    """Führt einen vollständigen Systemcheck durch"""
+    results = {}
+    
+    # Teste Dropbox-Verbindung
+    try:
+        dropbox_status = dropbox_service.get_token_info()
+        results["dropbox"] = {"status": "ok", "details": dropbox_status}
+    except Exception as e:
+        results["dropbox"] = {"status": "error", "message": str(e)}
+    
+    # Teste Qdrant-Verbindung
+    try:
+        indexed_docs = qdrant_service.list_indexed_documents()
+        results["qdrant"] = {"status": "ok", "indexed_documents": len(indexed_docs), "doc_ids": indexed_docs[:5] if indexed_docs else []}
+    except Exception as e:
+        results["qdrant"] = {"status": "error", "message": str(e)}
+    
+    # Teste LLM mit einfacher Anfrage
+    try:
+        llm_result = await llm_service.debug_api_call("Was ist 2+2?")
+        raw_response = llm_result.get("cleaned_text", "Keine Antwort")
+        results["llm"] = {
+            "status": "ok", 
+            "response": raw_response,
+            "api_url": llm_result.get("api_url", ""),
+            "status_code": llm_result.get("status_code", 0)
+        }
+    except Exception as e:
+        results["llm"] = {"status": "error", "message": str(e)}
+    
+    return results

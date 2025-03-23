@@ -37,7 +37,7 @@ class LLMService:
         logger.info(f"Timeout: {self.timeout}s, Max retries: {self.max_retries}")
     
     def _clean_output(self, text):
-        """Bereinigt die Ausgabe des Modells von internen Gedankengängen und Artefakten"""
+        """Bereinigt die Ausgabe des Modells von internen Gedankengängen"""
         # Wenn der Text None oder leer ist, frühzeitig zurückkehren
         if not text:
             return "Keine Antwort vom LLM erhalten."
@@ -45,19 +45,8 @@ class LLMService:
         # Debug-Log der Rohausgabe
         logger.info(f"Rohausgabe vom LLM (erste 200 Zeichen): {text[:200]}")
         
-        # Erkennung und Entfernung von strukturierten Artefakten
-        # Entferne COVID-Info-Tags und andere spezielle Markierungen
-        covid_patterns = [
-            r'\[/?covidInfo\].*?(?:\n|$)',
-            r'_\s*COVID-19-INFO:.*?(?:\n|$)',
-            r'\[bonusInformationen\..*?\]',
-            r'Ergibt die Zusammenfassung der Datenschutz-Grundverord.*'
-        ]
-        for pattern in covid_patterns:
-            text = re.sub(pattern, '', text, flags=re.DOTALL | re.IGNORECASE)
-        
         # Entferne alle bekannten Gedankengangsmuster
-        thought_patterns = [
+        patterns = [
             r"Der Nutzer[^\n]*\n",
             r"Okay, (?:so )?I need to.*?First,",
             r"Okay, ich muss.*?\n",
@@ -71,7 +60,7 @@ class LLMService:
             r"Looking at the.*?\n",
         ]
         
-        for pattern in thought_patterns:
+        for pattern in patterns:
             text = re.sub(pattern, "", text, flags=re.DOTALL)
         
         # Entferne Anführungszeichen am Anfang und Ende
@@ -89,34 +78,8 @@ class LLMService:
         text = re.sub(r'\n{3,}', '\n\n', text)
         text = re.sub(r'\s{2,}', ' ', text)
         
-        # Schneidet die Antwort ab, wenn spezielle Marker gefunden werden
-        lines = text.split('\n')
-        cleaned_lines = []
-        
-        for line in lines:
-            # Abbruch, wenn eine der folgenden Markierungen gefunden wird
-            if any(marker in line for marker in [
-                '[', ']', 'covid', 'COVID', 'bonus', 'Bonus', 
-                'Datenschutz', 'Verord', '---', '***', '///', '###'
-            ]):
-                # Stoppe, wenn solche Marker gefunden werden
-                break
-            cleaned_lines.append(line)
-        
-        # Bereinigten Text wieder zusammenfügen
-        cleaned_text = '\n'.join(cleaned_lines).strip()
-        
-        # Als Fallback: Wenn der Text zu kurz ist nach der Bereinigung, 
-        # versuche nur den ersten Satz zu extrahieren
-        if len(cleaned_text) < 20 and len(text) > 30:
-            # Extrahiere den ersten Satz, der sinnvoll erscheint
-            sentences = re.split(r'(?<=[.!?])\s+', text)
-            for sentence in sentences:
-                if len(sentence) > 15 and not any(marker in sentence for marker in ['[', ']', 'covid', 'COVID']):
-                    cleaned_text = sentence
-                    break
-        
         # Debug-Log der bereinigten Ausgabe
+        cleaned_text = text.strip()
         logger.info(f"Bereinigte Ausgabe (erste 200 Zeichen): {cleaned_text[:200]}")
         
         return cleaned_text
@@ -146,8 +109,8 @@ class LLMService:
             logger.error("Cannot generate answer: RUNPOD_API_KEY is not set")
             return "Fehler: RunPod API-Key fehlt. Bitte konfiguriere den API-Key in der .env-Datei."
             
-        # Optimiertes Prompt-Format für DeepSeek
-        prompt = f"""Du bist ein präziser Assistent für ein Immobilienunternehmen. Du hilfst bei der Analyse von Immobiliendokumenten wie Mietverträgen, Kaufverträgen und Darlehensverträgen. Antworte in gutem Deutsch, direkt und ohne Gedankengänge. Füge keine zusätzlichen Informationen, Hinweise oder Tags hinzu.
+        # Verbessertes Prompt-Format für DeepSeek - klarer und direkter
+        prompt = f"""Du bist ein präziser Assistent für ein Immobilienunternehmen. Du hilfst bei der Analyse von Immobiliendokumenten wie Mietverträgen, Kaufverträgen und Darlehensverträgen. Antworte in gutem Deutsch, direkt und ohne Gedankengänge.
 
 Benutze NUR den folgenden Kontext, um die Frage zu beantworten. Wenn du die Antwort im Kontext nicht finden kannst, sage ehrlich, dass du es nicht weißt.
 
