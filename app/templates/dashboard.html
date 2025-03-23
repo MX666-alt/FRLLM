@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1>Dashboard</h1>
+        <p class="lead">Willkommen bei deinem Immobilien-Dokument-RAG System</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Dokumente durchsuchen</h5>
+                <p class="card-text">Durchsuche alle indizierten Dokumente mit einer einfachen Anfrage.</p>
+                <a href="/search" class="btn btn-primary">Zur Suche</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Dokumente verwalten</h5>
+                <p class="card-text">Sieh dir alle Dokumente an und indiziere sie für die Suche.</p>
+                <a href="/documents" class="btn btn-primary">Zu den Dokumenten</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Indizierte Dokumente</h5>
+                <p class="card-text">Sieh dir alle bereits indizierten Dokumente an.</p>
+                <a href="/indexed-documents" class="btn btn-primary">Zu den indizierten Dokumenten</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Schnellstart-Anleitung</h5>
+            </div>
+            <div class="card-body">
+                <h5>So nutzt du dieses System:</h5>
+                <ol>
+                    <li>Gehe zu <strong>Dokumente</strong>, um alle Dokumente aus deinem Dropbox-Konto zu sehen.</li>
+                    <li>Klicke auf den <strong>Indizieren</strong>-Button bei einem Dokument, um es für die Suche zu indizieren.</li>
+                    <li>Gehe zur <strong>Suche</strong>, um Fragen zu deinen indizierten Dokumenten zu stellen.</li>
+                    <li>Das System durchsucht alle indizierten Dokumente und verwendet KI, um dir eine Antwort zu geben.</li>
+                    <li>Du kannst unter <strong>Indizierte Dokumente</strong> prüfen, welche Dokumente bereits indiziert sind.</li>
+                </ol>
+                <p>Beispielfragen, die du stellen könntest:</p>
+                <ul>
+                    <li>Wie hoch ist die monatliche Miete für die Wohnung in der Schlesienstraße 5?</li>
+                    <li>Wer ist der Vermieter für die Wohnung in der Schlesienstraße 1?</li>
+                    <li>Welche besonderen Klauseln enthält der Mietvertrag für die Schlesienstraße 7?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

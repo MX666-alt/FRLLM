@@ -1,0 +1,40 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Document viewer */
+.document-content {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+}
+
+.document-text {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Search results */
+.answer-box {
+    border-left: 4px solid #007bff;
+    background-color: #f8f9fa;
+}
+
+.result-text {
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.85rem;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Spinner */
+.spinner-container {
+    min-height: 100px;
+}

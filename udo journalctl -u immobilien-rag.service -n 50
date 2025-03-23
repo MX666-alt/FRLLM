@@ -1,0 +1,15 @@
+[0;1;32m●[0m immobilien-rag.service - Immobilien-Dokument-RAG Service
+     Loaded: loaded (]8;;file://ubuntu-4gb-fsn1-2/etc/systemd/system/immobilien-rag.service/etc/systemd/system/immobilien-rag.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Sun 2025-03-23 09:16:14 UTC; 3s ago
+   Main PID: 47491 (run.sh)
+      Tasks: 3 (limit: 4540)
+     Memory: 267.8M (peak: 267.8M)
+        CPU: 3.954s
+     CGroup: /system.slice/immobilien-rag.service
+             ├─[0;38;5;245m47491 /bin/bash /opt/immobilien-rag/run.sh[0m
+             └─[0;38;5;245m47492 python -m app.main[0m
+
+Mar 23 09:16:09 ubuntu-4gb-fsn1-2 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mimmobilien-rag.service: Failed with result 'exit-code'.[0m
+Mar 23 09:16:09 ubuntu-4gb-fsn1-2 systemd[1]: immobilien-rag.service: Consumed 10.406s CPU time.
+Mar 23 09:16:14 ubuntu-4gb-fsn1-2 systemd[1]: immobilien-rag.service: Scheduled restart job, restart counter is at 13.
+Mar 23 09:16:14 ubuntu-4gb-fsn1-2 systemd[1]: Started immobilien-rag.service - Immobilien-Dokument-RAG Service.

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block title %}{{ document.name }} - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>{{ document.name }}</h1>
+            <div>
+                <a href="/documents?path={{ document.path.rsplit('/', 1)[0]|urlencode }}" class="btn btn-secondary">Zurück</a>
+                <button id="indexButton" class="btn btn-primary" data-document-path="{{ document.path }}">Indizieren</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="document-content p-3">
+                    <pre class="document-text">{{ document.content }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="errorContainer" class="alert alert-danger mt-3" style="display: none;"></div>
+<div id="successContainer" class="alert alert-success mt-3" style="display: none;"></div>
+
+<div class="card mt-4">
+    <div class="card-header">Debug Information</div>
+    <div class="card-body">
+        <p><strong>Dokumentpfad:</strong> <code>{{ document.path }}</code></p>
+        <p><strong>Dokument ID:</strong> <code>{{ document.id }}</code></p>
+        <p><strong>Inhaltslänge:</strong> <code>{{ document.content|length }} Zeichen</code></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle document indexing
+    const indexButton = document.getElementById('indexButton');
+    const errorContainer = document.getElementById('errorContainer');
+    const successContainer = document.getElementById('successContainer');
+    
+    if (indexButton) {
+        indexButton.addEventListener('click', async function() {
+            const documentPath = this.getAttribute('data-document-path');
+            // Remove leading slash and URL encode
+            const encodedPath = encodeURIComponent(documentPath.slice(1)); 
+            
+            // Clear previous messages
+            errorContainer.style.display = 'none';
+            successContainer.style.display = 'none';
+            
+            try {
+                // Show loading state
+                this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Indiziere...';
+                this.disabled = true;
+                
+                console.log(`Sending indexing request for: ${documentPath}`);
+                console.log(`Encoded path: ${encodedPath}`);
+                
+                // Get the token from cookie or localStorage
+                const token = document.cookie
+                    .split('; ')
+                    .find(row => row.startsWith('access_token='))
+                    ?.split('=')[1] || localStorage.getItem('access_token');
+                
+                const response = await fetch(`/api/documents/index/${encodedPath}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token || ''}`
+                    }
+                });
+                
+                console.log(`Response status: ${response.status}`);
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Indexing successful:', result);
+                    
+                    // Show success message
+                    this.innerHTML = 'Indiziert ✓';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-success');
+                    
+                    successContainer.textContent = 'Dokument wurde erfolgreich indiziert!';
+                    successContainer.style.display = 'block';
+                } else {
+                    // Parse error message
+                    let errorMessage = 'Fehler beim Indizieren des Dokuments.';
+                    try {
+                        const error = await response.json();
+                        errorMessage = error.detail || errorMessage;
+                    } catch (e) {
+                        console.error('Error parsing error response:', e);
+                    }
+                    
+                    console.error('Error indexing document:', errorMessage);
+                    
+                    // Show error message
+                    this.innerHTML = 'Indizieren';
+                    this.disabled = false;
+                    
+                    errorContainer.textContent = `Fehler: ${errorMessage}`;
+                    errorContainer.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Exception during indexing:', error);
+                
+                // Show error message
+                this.innerHTML = 'Indizieren';
+                this.disabled = false;
+                
+                errorContainer.textContent = `Ein Fehler ist aufgetreten: ${error.message}`;
+                errorContainer.style.display = 'block';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

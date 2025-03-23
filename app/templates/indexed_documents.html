@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Indizierte Dokumente - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Indizierte Dokumente</h1>
+            <span class="badge bg-primary">{{ documents_count }} Dokumente indiziert</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                {% if documents %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>ID/Pfad</th>
+                                <th>Aktionen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for document in documents %}
+                            <tr>
+                                <td>{{ document.name }}</td>
+                                <td><code>{{ document.id }}</code></td>
+                                <td>
+                                    <a href="/view-document?path={{ document.path|urlencode }}" class="btn btn-sm btn-outline-primary">Anzeigen</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>Es wurden keine indizierten Dokumente gefunden.</p>
+                    <p>Gehe auf die <a href="/documents">Dokumente</a>-Seite, um Dokumente zu indizieren.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

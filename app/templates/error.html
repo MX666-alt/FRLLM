@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Fehler - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="error-container mt-5">
+            <h1 class="display-1 text-danger">{{ status_code }}</h1>
+            <h2 class="mb-4">Oops! Ein Fehler ist aufgetreten</h2>
+            <p class="lead">{{ detail }}</p>
+            <a href="/" class="btn btn-primary mt-4">Zurück zum Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

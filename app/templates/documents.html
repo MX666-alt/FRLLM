@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Dokumente - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Dokumente</h1>
+            <div class="current-path">
+                {% if current_path %}
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/documents">Root</a></li>
+                        {% for path_part in current_path_parts %}
+                            {% if loop.last %}
+                                <li class="breadcrumb-item active" aria-current="page">{{ path_part.name }}</li>
+                            {% else %}
+                                <li class="breadcrumb-item"><a href="/documents?path={{ path_part.path|urlencode }}">{{ path_part.name }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ol>
+                </nav>
+                {% else %}
+                <span>Ordner: Root</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Typ</th>
+                                <th>Aktionen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for document in documents %}
+                            <tr>
+                                <td>
+                                    {% if document.type == 'folder' %}
+                                    <i class="bi bi-folder me-2"></i>
+                                    <a href="/documents?path={{ document.path|urlencode }}">{{ document.name }}</a>
+                                    {% else %}
+                                    <i class="bi bi-file-text me-2"></i>
+                                    <a href="/view-document?path={{ document.path|urlencode }}">{{ document.name }}</a>
+                                    {% endif %}
+                                </td>
+                                <td>{{ document.type|title }}</td>
+                                <td>
+                                    {% if document.type == 'file' %}
+                                    <button class="btn btn-sm btn-primary index-document" data-document-path="{{ document.path }}">Indizieren</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-5">
+                                    <div class="empty-state">
+                                        <i class="bi bi-folder-x fs-1 text-muted mb-3"></i>
+                                        <h4>Keine Dokumente gefunden</h4>
+                                        <p class="text-muted">In diesem Ordner befinden sich keine Dokumente oder Unterordner.</p>
+                                        {% if current_path %}
+                                        <a href="/documents" class="btn btn-outline-primary mt-2">Zurück zum Root-Verzeichnis</a>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="debug-info" class="mt-4 card">
+    <div class="card-header">Debug Information</div>
+    <div class="card-body">
+        <p><strong>Aktueller Pfad:</strong> <code>{{ current_path }}</code></p>
+        <p><strong>Anzahl der Dokumente:</strong> <code>{{ documents|length }}</code></p>
+        {% if documents %}
+        <p><strong>Erstes Dokument Pfad:</strong> <code>{{ documents[0].path }}</code></p>
+        <p><strong>Erstes Dokument URL:</strong> <code>/documents?path={{ documents[0].path|urlencode }}</code></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle document indexing
+    document.querySelectorAll('.index-document').forEach(button => {
+        button.addEventListener('click', async function() {
+            const documentPath = this.getAttribute('data-document-path');
+            const encodedPath = encodeURIComponent(documentPath.slice(1)); // Remove leading slash and URL encode
+            
+            try {
+                this.innerHTML = 'Indiziere...';
+                this.disabled = true;
+                
+                const response = await fetch(`/api/documents/index/${encodedPath}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access_token') || document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*\=\s*([^;]*).*$)|^.*$/, "$1")}`
+                    }
+                });
+                
+                if (response.ok) {
+                    this.innerHTML = 'Indiziert ✓';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-success');
+                } else {
+                    const error = await response.json();
+                    alert(`Fehler: ${error.detail}`);
+                    this.innerHTML = 'Indizieren';
+                    this.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error indexing document:', error);
+                alert('Ein Fehler ist aufgetreten. Bitte versuche es erneut.');
+                this.innerHTML = 'Indizieren';
+                this.disabled = false;
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

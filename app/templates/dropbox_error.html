@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Dropbox-Verbindungsfehler - Immobilien-Dokument-RAG{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="error-container mt-5">
+            <h1 class="display-1 text-danger"><i class="bi bi-cloud-slash"></i></h1>
+            <h2 class="mb-4">Verbindungsproblem mit Dropbox</h2>
+            <p class="lead">Es gibt ein Problem mit der Verbindung zu Dropbox. Wir können deine Dokumente derzeit nicht laden.</p>
+            
+            {% if error_details %}
+            <div class="alert alert-warning mt-4">
+                <h5>Fehlerdetails:</h5>
+                <p>{{ error_details }}</p>
+            </div>
+            {% endif %}
+            
+            <p class="mt-4">Mögliche Lösungen:</p>
+            <ul class="text-start mx-auto" style="max-width: 500px;">
+                <li>Überprüfe, ob das Dropbox-Token noch gültig ist</li>
+                <li>Stelle sicher, dass die Dropbox-App-Berechtigungen korrekt sind</li>
+                <li>Überprüfe die Internetverbindung des Servers</li>
+                <li>Überprüfe die Server-Logs für weitere Details</li>
+            </ul>
+            
+            <a href="/" class="btn btn-primary mt-4">Zurück zum Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
